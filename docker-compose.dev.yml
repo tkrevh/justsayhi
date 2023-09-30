@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+    environment:
+      - DEBUG
+      - SECRET_KEY
+      - DATABASE_URL
+      - SLACK_CLIENT_ID
+      - SLACK_CLIENT_SECRET
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+    expose:
+      - "9000"
+    networks:
+      - django-network
+  nginx:
+    build: nginx-dev
+    restart: always
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/media
+      - ./data/nginx:/etc/nginx/conf.d:rw
+      - ./data/certbot/conf:/etc/letsencrypt:rw
+      - ./data/certbot/www:/var/www/certbot:rw
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - django-network
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt:rw
+      - ./data/certbot/www:/var/www/certbot:rw      
+networks:
+  django-network:
+    name: django-network
+volumes:
+  media_volume:
+  static_volume:

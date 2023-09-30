@@ -1,0 +1,33 @@
+{% extends "justsayhi/base.html" %}
+{% load static %}
+
+{% block title %}Successfully installed JustSayHi{% endblock %}
+
+{% block content %}
+      <div class="container pt-24 md:pt-36 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        <!--Left Col-->
+        <div class="flex flex-col w-full justify-center lg:items-center overflow-y-hidden">
+            <div class="flex xl:w-2/5 flex-col">
+                <h1 class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center">
+                    You have successfully installed
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
+                      JustSayHi
+                    </span>
+                    to your Slack Workspace 🤗
+                </h1>
+                <p class="leading-normal text-base md:text-2xl mb-8 text-center">
+                    You can now use the following commands in your Slack Worspace.
+                </p>
+                <div class="block mx-auto mb-12">
+                    <img src="{% static 'images/slack-commands.jpg' %}">
+                </div>
+                <p clasS="mb-8">
+                    JustSayHi sends a default <span class="text-white">"Hi @username, welcome to our Slack :wave:"</span> message to all new team members when they join.
+                </p>
+                <p class="">
+                    You can modify that by adding one or more of your own messages with the <span class="text-white">/add</span> command. If you have more than one message, a random message will be picked to welcome the new member.
+                </p>
+            </div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,12 @@
+.env
+.env.prod
+.idea
+.DS_Store
+*.pyc
+venv
+db.sqlite3
+app/local_settings.py
+data/*
+template
+static
+export.json
